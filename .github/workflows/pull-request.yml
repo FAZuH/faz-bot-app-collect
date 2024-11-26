@@ -71,5 +71,5 @@ jobs:
           MYSQL_FAZWYNN_DATABASE: faz-wynn
         run: |
           cp .env-example .env
-          uv run scripts/initdb.py
+          uv run faz-initdb
           uv run pytest
