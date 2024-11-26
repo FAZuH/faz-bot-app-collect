@@ -90,24 +90,6 @@ jobs:
           name: dist
           path: dist/
 
-  pypi-publish:
-    name: Upload Release to PyPI
-    needs: [changelog, build]
-    if: ${{ needs.changelog.outputs.skipped != 'true' }}
-    runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Publish Package Distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-
   release-github:
     name: Release to GitHub
     needs: [changelog, build]
