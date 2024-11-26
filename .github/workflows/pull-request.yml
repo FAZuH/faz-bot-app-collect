@@ -1,0 +1,75 @@
+# Credit: Workflow configs inspired from https://github.com/Wynntils/Wynntils
+name: Python Format & Test
+
+on:
+  workflow_dispatch:
+  pull_request_target:
+    types: [opened, synchronize, reopened, ready_for_review]
+  merge_group:
+    branches: [main]
+
+jobs:
+  format-and-test:
+    name: Run Python Tests
+    if: "! github.event.pull_request.draft"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          token: ${{ secrets.PRIVATE_TOKEN }}
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Stop Default MySQL Server (if any)
+        run: sudo service mysql stop
+
+      - name: Set Up MariaDB
+        run: |
+          docker run \
+          --name mysql \
+          -e MYSQL_ROOT_PASSWORD=password \
+          -d -p "3306:3306" mariadb:11.4.2
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: "pyproject.toml"
+
+      - name: Install the Project
+        run: uv sync --all-extras --dev
+
+      - name: Format with Ruff and Black
+        run: |
+          uv run ruff check --fix --exit-zero --no-cache .
+          uv run black .
+
+      - name: Commit Format
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_user_name: "FAZuH-bot"
+          commit_user_email: "fazuhhh@proton.me"
+          commit_message: "ci: ruff and black formatting"
+
+      - name: Wait for MariaDB
+        run: ./src/faz/bot/dev/scripts/wait-for-it.sh -t 30 -h localhost -p 3306
+
+      - name: Run Tests
+        env:
+          # Note: Test append the _test suffix to the database names
+          MYSQL_HOST: localhost
+          MYSQL_PORT: 3306
+          MYSQL_USER: faz
+          MYSQL_PASSWORD: password
+          MYSQL_FAZCORD_DATABASE: faz-cord
+          MYSQL_FAZWYNN_DATABASE: faz-wynn
+        run: |
+          cp .env-example .env
+          uv run scripts/initdb.py
+          uv run pytest

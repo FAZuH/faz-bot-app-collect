@@ -1,0 +1,104 @@
+[project]
+name = "faz-bot-app-collect"
+# On the release branches, this string will be automatically updated by the bots
+# Do not change this in the main branch!
+
+
+version = "0.1.0"
+
+
+description = "faz-bot app for Wynncraft data collection"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.13"
+authors = [
+    { name = "FAZuH", email = "fazuhhh@proton.me" }
+]
+dependencies = [
+    "audioop-lts>=0.2.1",
+    "faz-bot-core>=0.2.0",
+    "faz-utils>=0.1.2",
+    "loguru>=0.7.2",
+    "requests>=2.32.3",
+    "setuptools>=75.6.0",
+]
+
+[project.urls]
+Source = "https://github.com/FAZuH/faz-bot-app-collect"
+Issues = "https://github.com/FAZuH/faz-bot-app-collect/issues"
+Documentation = "https://github.com/FAZuH/faz-bot-app-collect#readme"
+
+[dependency-groups]
+dev = [
+    "alembic>=1.14.0",
+    "black>=24.10.0",
+    "pytest>=8.3.3",
+    "ruff>=0.7.4",
+]
+
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = [ 
+    "faz.bot.app.collect*",
+]
+
+[project.scripts]
+faz-collect = "faz.bot.app.collect.__main__:main"
+
+[tool.pytest.ini_options]
+addopts = "-ra -q"
+testpaths = [
+    "tests",
+]
+
+[tool.ruff]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".hg",
+    ".ipynb_checkpoints",
+    ".mypy_cache",
+    ".nox",
+    ".pants.d",
+    ".pyenv",
+    ".pytest_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".svn",
+    ".tox",
+    ".venv",
+    ".vscode",
+    "__pypackages__",
+    "_build",
+    "buck-out",
+    "build",
+    "dist",
+    "node_modules",
+    "site-packages",
+    "venv",
+]
+line-length = 100
+indent-width = 4
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = ["E731"]
+fixable = ["ALL"]
+unfixable = []
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+docstring-code-format = false
+docstring-code-line-length = "dynamic"
