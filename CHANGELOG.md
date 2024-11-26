@@ -1,3 +1,7 @@
+## [0.1.4](https://github.com/FAZuH/faz-bot-app-collect/compare/v0.1.3...v0.1.4) (2024-11-26)
+
+
+
 ## [0.1.3](https://github.com/FAZuH/faz-bot-app-collect/compare/v0.1.2...v0.1.3) (2024-11-26)
 
 
