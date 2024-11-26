@@ -18,7 +18,7 @@ class App:
         p = self.properties
         p.setup()
         LoggerSetup.setup(
-            "logs/fazbeat/fazcollect",
+            "logs",
             p.FAZCOLLECT_DISCORD_LOG_WEBHOOK,
             p.ADMIN_DISCORD_ID,
         )
