@@ -3,11 +3,13 @@ from typing import Callable
 
 from dotenv import load_dotenv
 
+from faz.bot.app.collect import __version__
+
 
 class Properties:
     # Application constants
     AUTHOR = "FAZuH"
-    VERSION = "0.0.1"
+    VERSION = __version__
 
     # .env
     ADMIN_DISCORD_ID: int
