@@ -6,7 +6,7 @@ on:
   pull_request_target:
     types: [opened, synchronize, reopened, ready_for_review]
   merge_group:
-    branches: [main]
+    branches: [main, development]
 
 jobs:
   format-and-test:
@@ -30,7 +30,7 @@ jobs:
           docker run \
           --name mysql \
           -e MYSQL_ROOT_PASSWORD=password \
-          -d -p "3306:3306" mariadb:11.4.2
+          -d -p "127.0.0.1:3306:3306" mariadb:11.4.2
 
       - name: Install uv
         uses: astral-sh/setup-uv@v3
@@ -45,20 +45,20 @@ jobs:
       - name: Install the Project
         run: uv sync --all-extras --dev
 
-      - name: Format with Ruff and Black
+      - name: Format with isort and Ruff
         run: |
-          uv run ruff check --fix --exit-zero --no-cache .
-          uv run black .
+          uv run isort .
+          uv run ruff format .
 
       - name: Commit Format
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_user_name: "FAZuH-bot"
           commit_user_email: "fazuhhh@proton.me"
-          commit_message: "ci: ruff and black formatting"
+          commit_message: "ci: isort and Ruff formatting"
 
       - name: Wait for MariaDB
-        run: ./src/faz/bot/dev/scripts/wait-for-it.sh -t 30 -h localhost -p 3306
+        run: .github/wait-for-it.sh -t 30 -h localhost -p 3306
 
       - name: Run Tests
         env:
@@ -72,4 +72,4 @@ jobs:
         run: |
           cp .env-example .env
           uv run faz-initdb
-          uv run pytest
+          uv run pytest .
