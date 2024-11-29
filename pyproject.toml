@@ -4,7 +4,7 @@ name = "faz-bot-app-collect"
 # Do not change this in the main branch!
 
 
-version = "0.1.4"
+version = "0.1.5"
 
 
 description = "faz-bot app for Wynncraft data collection"
