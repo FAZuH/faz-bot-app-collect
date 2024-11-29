@@ -47,6 +47,7 @@ jobs:
           git-user-name: "FAZuH-bot"
           git-user-email: "fazuhhh@proton.me"
           pre-commit: ./.github/.pre-commit.js
+          config-file-path: ./.github/.config.js
           version-file: ./version.json
           skip-version-file: true
           skip-git-pull: true
@@ -89,24 +90,6 @@ jobs:
         with:
           name: dist
           path: dist/
-
-  pypi-publish:
-    name: Upload Release to PyPI
-    needs: [changelog, build]
-    if: ${{ needs.changelog.outputs.skipped != 'true' }}
-    runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
-    steps:
-      - name: Download Artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist
-          path: dist/
-
-      - name: Publish Package Distributions to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
 
   release-github:
     name: Release to GitHub
