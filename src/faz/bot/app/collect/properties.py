@@ -12,7 +12,7 @@ class Properties:
     VERSION = __version__
 
     # .env
-    ADMIN_DISCORD_ID: int
+    DEV_DISCORD_ID: int
 
     FAZCOLLECT_DISCORD_LOG_WEBHOOK: str
     FAZCOLLECT_DISCORD_STATUS_WEBHOOK: str
@@ -38,7 +38,7 @@ class Properties:
     @classmethod
     def _read_env(cls) -> None:
         load_dotenv()
-        cls.ADMIN_DISCORD_ID = cls._must_get_env("ADMIN_DISCORD_ID", int)
+        cls.DEV_DISCORD_ID = cls._must_get_env("DEV_DISCORD_ID", int)
 
         cls.FAZCOLLECT_DISCORD_LOG_WEBHOOK = cls._must_get_env("FAZCOLLECT_DISCORD_LOG_WEBHOOK")
         cls.FAZCOLLECT_DISCORD_STATUS_WEBHOOK = cls._must_get_env(

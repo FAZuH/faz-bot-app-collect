@@ -20,7 +20,7 @@ class App:
         LoggerSetup.setup(
             "logs",
             p.FAZCOLLECT_DISCORD_LOG_WEBHOOK,
-            p.ADMIN_DISCORD_ID,
+            p.DEV_DISCORD_ID,
         )
 
         self._api = WynnApi()
