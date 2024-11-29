@@ -20,7 +20,7 @@ class App:
         LoggerSetup.setup(
             "logs",
             p.FAZCOLLECT_DISCORD_LOG_WEBHOOK,
-            p.ADMIN_DISCORD_ID,
+            p.DEV_DISCORD_ID,
         )
 
         self._api = WynnApi()
@@ -61,10 +61,8 @@ class App:
 
     def _register_retry_handler(self) -> None:
         """Registers retry handler to this appp"""
-        register_lambda: Callable[[Callable[..., Any]], None] = (
-            lambda func: RetryHandler.register(
-                func, self.properties.FAZWYNN_MAX_RETRIES, Exception
-            )
+        register_lambda: Callable[[Callable[..., Any]], None] = lambda func: RetryHandler.register(
+            func, self.properties.FAZWYNN_MAX_RETRIES, Exception
         )
 
         # Register retry handler to database

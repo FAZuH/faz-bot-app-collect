@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from threading import Lock
-from typing import TYPE_CHECKING, Any, Iterable
+from typing import Any, Iterable, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from faz.bot.wynn.api.base_response import BaseResponse

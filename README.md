@@ -55,7 +55,7 @@ Do `export MYSQL_FAZCORD_DATABASE=faz-cord` (temporary) and run `uv run faz-init
 
 ## Usage
 
-Run the app using `uv run faz-collect`.
+Run the app using `uv run faz-bot-collect`.
 
 ## Bug Reports and Feature Requests
 

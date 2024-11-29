@@ -123,6 +123,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.bak
 .venv
 env/
 venv/
@@ -161,7 +162,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# faz-utils
+# Others
 .sandbox.py
+sandbox.py
 .jukit
 .vscode
+todo.md
+logs

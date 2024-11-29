@@ -36,9 +36,7 @@ class TestResponseHandler(TestCase):
         # NOTE: Assert that player 1 and 2 has logged on.
         self.assertSetEqual(self._manager.logged_on_players, {uuid0, uuid1})
         # NOTE: Assert that player 1 and 2 is online, with the correct logged on datetime.
-        self.assertDictEqual(
-            self._manager.online_players, {uuid0: datetime0, uuid1: datetime0}
-        )
+        self.assertDictEqual(self._manager.online_players, {uuid0: datetime0, uuid1: datetime0})
 
         # Act
         self._manager._process_onlineplayers_response(resp1)
@@ -47,9 +45,7 @@ class TestResponseHandler(TestCase):
         # NOTE: Assert that only player 2 has logged on because player 1 is already logged on.
         self.assertSetEqual(self._manager._logged_on_players, {uuid2})
         # NOTE: Assert that player 0 is no longer online, while player 1 and player 2 has the correct logged on datetime.
-        self.assertDictEqual(
-            self._manager.online_players, {uuid1: datetime0, uuid2: datetime1}
-        )
+        self.assertDictEqual(self._manager.online_players, {uuid1: datetime0, uuid2: datetime1})
 
     def test_enqueue_player_stats(self) -> None:
         # Prepare
@@ -63,9 +59,7 @@ class TestResponseHandler(TestCase):
         # NOTE: Assert that the correct player is being queued.
         self._api.player.get_full_stats.assert_called_once_with(uuid0)
         # NOTE: Assert that enqueue is called with the correct arguments.
-        self.__request_list.enqueue.assert_called_once_with(
-            0, self._api.player.get_full_stats()
-        )
+        self.__request_list.enqueue.assert_called_once_with(0, self._api.player.get_full_stats())
 
     def test_requeueonline_players(self) -> None:
         # Prepare
@@ -118,9 +112,7 @@ class TestResponseHandler(TestCase):
         # NOTE: Assert that only guild test1 is logged on, because test0 is already logged on.
         self.assertSetEqual(self._manager._logged_on_guilds, {guild1})
         # NOTE: Assert that both guilds are online with correct players.
-        self.assertDictEqual(
-            self._manager.online_guilds, {guild0: {uuid0, uuid1}, guild1: {uuid2}}
-        )
+        self.assertDictEqual(self._manager.online_guilds, {guild0: {uuid0, uuid1}, guild1: {uuid2}})
 
         # Prepare
         mock3.body.online = False
@@ -161,9 +153,7 @@ class TestResponseHandler(TestCase):
         # NOTE: Assert that self._api.player.get_online_uuids() is called with the correct arguments
         self._api.player.get_full_stats.assert_called_once()
         # NOTE: Assert that enqueue is called with the correct arguments.
-        self.__request_list.enqueue.assert_called_once_with(
-            69, self._api.player.get_full_stats()
-        )
+        self.__request_list.enqueue.assert_called_once_with(69, self._api.player.get_full_stats())
 
     # GuildResponse
     def test_requeue_guild(self) -> None:

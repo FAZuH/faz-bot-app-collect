@@ -23,22 +23,13 @@ dependencies = [
     "setuptools>=75.6.0",
 ]
 
+[project.scripts]
+faz-bot-collect = "faz.bot.app.collect.__main__:main"
+
 [project.urls]
 Source = "https://github.com/FAZuH/faz-bot-app-collect"
 Issues = "https://github.com/FAZuH/faz-bot-app-collect/issues"
 Documentation = "https://github.com/FAZuH/faz-bot-app-collect#readme"
-
-[dependency-groups]
-dev = [
-    "alembic>=1.14.0",
-    "black>=24.10.0",
-    "pytest>=8.3.3",
-    "ruff>=0.7.4",
-]
-
-[build-system]
-requires = ["setuptools>=42"]
-build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -46,14 +37,34 @@ include = [
     "faz.bot*",
 ]
 
-[project.scripts]
-faz-collect = "faz.bot.app.collect.__main__:main"
+# Common
+[dependency-groups]
+dev = [
+    "alembic>=1.14.0",
+    "black>=24.10.0",
+    "pytest>=8.3.3",
+    "isort>=5.13.2",
+    "ruff>=0.7.4",
+]
+sandbox = [
+    "ipykernel>=6.29.5",
+    "matplotlib>=3.9.2",
+    "neovim>=0.3.1",
+]
+
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
 
 [tool.pytest.ini_options]
 addopts = "-ra -q"
 testpaths = [
     "tests",
 ]
+
+[tool.isort]
+profile = "google"
+line_length = 100
 
 [tool.ruff]
 exclude = [
