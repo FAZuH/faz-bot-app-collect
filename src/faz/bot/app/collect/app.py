@@ -61,10 +61,8 @@ class App:
 
     def _register_retry_handler(self) -> None:
         """Registers retry handler to this appp"""
-        register_lambda: Callable[[Callable[..., Any]], None] = (
-            lambda func: RetryHandler.register(
-                func, self.properties.FAZWYNN_MAX_RETRIES, Exception
-            )
+        register_lambda: Callable[[Callable[..., Any]], None] = lambda func: RetryHandler.register(
+            func, self.properties.FAZWYNN_MAX_RETRIES, Exception
         )
 
         # Register retry handler to database

@@ -40,9 +40,7 @@ class Properties:
         load_dotenv()
         cls.ADMIN_DISCORD_ID = cls._must_get_env("ADMIN_DISCORD_ID", int)
 
-        cls.FAZCOLLECT_DISCORD_LOG_WEBHOOK = cls._must_get_env(
-            "FAZCOLLECT_DISCORD_LOG_WEBHOOK"
-        )
+        cls.FAZCOLLECT_DISCORD_LOG_WEBHOOK = cls._must_get_env("FAZCOLLECT_DISCORD_LOG_WEBHOOK")
         cls.FAZCOLLECT_DISCORD_STATUS_WEBHOOK = cls._must_get_env(
             "FAZCOLLECT_DISCORD_STATUS_WEBHOOK"
         )

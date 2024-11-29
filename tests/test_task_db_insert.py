@@ -1,5 +1,8 @@
 from unittest import IsolatedAsyncioTestCase
-from unittest.mock import AsyncMock, MagicMock, Mock, patch
+from unittest.mock import AsyncMock
+from unittest.mock import MagicMock
+from unittest.mock import Mock
+from unittest.mock import patch
 
 from faz.bot.wynn.api.response.guild_response import GuildResponse
 from faz.bot.wynn.api.response.online_players_response import OnlinePlayersResponse
@@ -10,9 +13,7 @@ from faz.bot.app.collect.task.task_db_insert import TaskDbInsert
 
 class TestTaskDbInsert(IsolatedAsyncioTestCase):
     def setUp(self) -> None:
-        self._adapter_patcher = patch(
-            "faz.bot.app.collect.task.task_db_insert.ApiResponseAdapter"
-        )
+        self._adapter_patcher = patch("faz.bot.app.collect.task.task_db_insert.ApiResponseAdapter")
         mock_adapter_class = self._adapter_patcher.start()
         self._mock_adapter = mock_adapter_class.return_value
         self._mock_api = AsyncMock()
@@ -75,15 +76,11 @@ class TestTaskDbInsert(IsolatedAsyncioTestCase):
         # Act
         await self._task_db_insert._insert_online_players_response(Mock())
         # Assert
-        db.online_players.update.assert_awaited_once_with(
-            adapter.to_online_players.return_value
-        )
+        db.online_players.update.assert_awaited_once_with(adapter.to_online_players.return_value)
         db.player_activity_history.insert.assert_awaited_once_with(
             adapter.to_player_activity_history.return_value, replace_on_duplicate=True
         )
-        db.worlds.update_worlds.assert_awaited_once_with(
-            list(adapter.to_worlds.return_value)
-        )
+        db.worlds.update_worlds.assert_awaited_once_with(list(adapter.to_worlds.return_value))
 
     async def test_insert_player_responses(self) -> None:
         # Prepare
@@ -99,9 +96,7 @@ class TestTaskDbInsert(IsolatedAsyncioTestCase):
         db.player_info.safe_insert.assert_awaited_once_with(
             [player_info], replace_on_duplicate=True
         )
-        db.character_info.insert.assert_awaited_once_with(
-            character_info, replace_on_duplicate=True
-        )
+        db.character_info.insert.assert_awaited_once_with(character_info, replace_on_duplicate=True)
         db.player_history.insert.assert_awaited_once_with(
             [player_history], ignore_on_duplicate=True
         )

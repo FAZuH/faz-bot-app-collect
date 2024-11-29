@@ -78,9 +78,7 @@ class TaskDbInsert(ITask):
         await self._insert_guild_response(guild_resps)
         await self._insert_player_responses(player_resps)
 
-    async def _insert_online_players_response(
-        self, resp: OnlinePlayersResponse | None
-    ) -> None:
+    async def _insert_online_players_response(self, resp: OnlinePlayersResponse | None) -> None:
         if not resp or not resp.body.raw:
             return
         adapter = self._response_adapter.OnlinePlayers
@@ -93,9 +91,7 @@ class TaskDbInsert(ITask):
 
         db = self._db
         await db.online_players.update(online_players)
-        await db.player_activity_history.insert(
-            player_activity_history, replace_on_duplicate=True
-        )
+        await db.player_activity_history.insert(player_activity_history, replace_on_duplicate=True)
         await db.worlds.update_worlds(worlds)
 
     async def _insert_player_responses(self, resps: list[PlayerResponse]) -> None:
@@ -135,9 +131,7 @@ class TaskDbInsert(ITask):
         db = self._db
         await db.guild_info.insert(guild_info, replace_on_duplicate=True)
         await db.guild_history.insert(guild_history, ignore_on_duplicate=True)
-        await db.guild_member_history.insert(
-            guild_member_history, ignore_on_duplicate=True
-        )
+        await db.guild_member_history.insert(guild_member_history, ignore_on_duplicate=True)
 
     @property
     def response_handler(self) -> ResponseHandler:

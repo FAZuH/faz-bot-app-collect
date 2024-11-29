@@ -122,11 +122,7 @@ class ApiResponseAdapter:
         def to_guild_member_history(resp: GuildResponse) -> list[GuildMemberHistory]:
             return [
                 GuildMemberHistory(
-                    uuid=(
-                        uuid.to_bytes()
-                        if uuid.is_uuid()
-                        else memberinfo.uuid.to_bytes()
-                    ),  # type: ignore
+                    uuid=(uuid.to_bytes() if uuid.is_uuid() else memberinfo.uuid.to_bytes()),  # type: ignore
                     contributed=memberinfo.contributed,
                     joined=memberinfo.joined.to_datetime(),
                     datetime=resp.headers.to_datetime(),

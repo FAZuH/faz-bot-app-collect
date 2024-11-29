@@ -1,15 +1,15 @@
-import unittest
 from typing import override
-from unittest.mock import AsyncMock, MagicMock, patch
+import unittest
+from unittest.mock import AsyncMock
+from unittest.mock import MagicMock
+from unittest.mock import patch
 
 from faz.bot.app.collect.task.task_api_request import TaskApiRequest
 
 
 class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
     def setUp(self):
-        self._event_loop_patcher = patch(
-            "faz.bot.app.collect.task.task_api_request.asyncio"
-        )
+        self._event_loop_patcher = patch("faz.bot.app.collect.task.task_api_request.asyncio")
         self._mock_event_loop = self._event_loop_patcher.start()
         self._mock_api = MagicMock()
         self._mock_request_queue = MagicMock()
@@ -75,9 +75,7 @@ class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
         # Prepare
         mock_coro = MagicMock()
         mock_coro.__qualname__ = "NotPlayer"
-        self._mock_api.player.get_online_uuids.__qualname__ = (
-            "PlayerEndpoint.get_online_uuids"
-        )
+        self._mock_api.player.get_online_uuids.__qualname__ = "PlayerEndpoint.get_online_uuids"
         mock_task = MagicMock()
         mock_task.get_coro.return_value = mock_coro
         self._task_api_request._running_requests.append(mock_task)
@@ -94,9 +92,7 @@ class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
         # Prepare
         mock_coro = MagicMock()
         mock_coro.__qualname__ = "NotPlayer"
-        self._mock_api.player.get_online_uuids.__qualname__ = (
-            "PlayerEndpoint.get_online_uuids"
-        )
+        self._mock_api.player.get_online_uuids.__qualname__ = "PlayerEndpoint.get_online_uuids"
         mock_task = MagicMock()
         mock_task.get_coro.return_value = mock_coro
         mock_task.exception.return_value = self._MockException
@@ -111,9 +107,7 @@ class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
         # Prepare
         mock_coro = MagicMock()
         mock_coro.__qualname__ = "PlayerEndpoint.get_online_uuids"
-        self._mock_api.player.get_online_uuids.__qualname__ = (
-            "PlayerEndpoint.get_online_uuids"
-        )
+        self._mock_api.player.get_online_uuids.__qualname__ = "PlayerEndpoint.get_online_uuids"
         mock_task = MagicMock()
         mock_task.get_coro.return_value = mock_coro
         mock_task.exception.return_value = self._MockException
@@ -134,9 +128,7 @@ class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
         self._task_api_request._check_responses()
         # Assert
         self.assertNotIn(mock_task, self._task_api_request._running_requests)
-        self._mock_response_queue.put.assert_called_once_with(
-            [mock_task.result.return_value]
-        )
+        self._mock_response_queue.put.assert_called_once_with([mock_task.result.return_value])
 
     @override
     def tearDown(self) -> None:

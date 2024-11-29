@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime
-from typing import TYPE_CHECKING, Any, override
+from typing import Any, override, TYPE_CHECKING
 
 from faz.utils.heartbeat.task.itask import ITask
 from loguru import logger
@@ -68,8 +68,7 @@ class TaskApiRequest(ITask):
         if running_request_count < self._CONCURRENT_REQUESTS:
             complement = self._CONCURRENT_REQUESTS - running_request_count
             new_requests = (
-                self._event_loop.create_task(req)
-                for req in self._request_list.dequeue(complement)
+                self._event_loop.create_task(req) for req in self._request_list.dequeue(complement)
             )
             self._running_requests.extend(new_requests)
 
@@ -87,13 +86,8 @@ class TaskApiRequest(ITask):
                 ok_results.append(task.result())
                 continue
 
-            if (
-                task.get_coro().__qualname__
-                == self._api.player.get_online_uuids.__qualname__
-            ):
-                self._request_list.enqueue(
-                    0, self._api.player.get_online_uuids(), priority=999
-                )
+            if task.get_coro().__qualname__ == self._api.player.get_online_uuids.__qualname__:
+                self._request_list.enqueue(0, self._api.player.get_online_uuids(), priority=999)
 
             with logger.catch(level="ERROR"):
                 raise exc

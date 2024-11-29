@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from threading import Lock
-from typing import TYPE_CHECKING, Any, Coroutine
+from typing import Any, Coroutine, TYPE_CHECKING
 
 if TYPE_CHECKING:
     from faz.bot.wynn.api.base_response import BaseResponse
