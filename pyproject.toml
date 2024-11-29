@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
-faz-collect = "faz.bot.app.collect.__main__:main"
+faz-bot-collect = "faz.bot.app.collect.__main__:main"
 
 [project.urls]
 Source = "https://github.com/FAZuH/faz-bot-app-collect"
