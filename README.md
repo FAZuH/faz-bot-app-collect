@@ -28,16 +28,16 @@ faz-bot app for Wynncraft data collection
 ### Steps
 
 1. Clone this repository
+    
+    ```sh
+    git clone https://github.com/FAZuH/faz-bot-app-collect
+    ```
 
-```sh
-git clone https://github.com/FAZuH/faz-bot-app-collect
-```
-
-Change directory into the repository with `cd faz-bot-app-collect`.
+    Change directory into the repository with `cd faz-bot-app-collect`.
 
 2. Set environment variables
 
-Copy with `cp .env-example .env`, and fill the placeholders in `.env`.
+    Copy with `cp .env-example .env`, and fill the placeholders in `.env`.
 
 3. Initialize the database
     
@@ -53,7 +53,7 @@ Copy with `cp .env-example .env`, and fill the placeholders in `.env`.
 
 **Non-docker** Run the app with `uv run faz-bot-collect`.
 
-**Docker** Run the app with `docker compose up --detach faz-bot-app-discord`
+**Docker** Run the app with `docker compose up --detach faz-bot-collect`
 
 ## Notes and Tips
 
