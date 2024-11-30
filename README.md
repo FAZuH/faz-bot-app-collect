@@ -10,6 +10,7 @@ faz-bot app for Wynncraft data collection
 - [Usage](#usage)
 - [Notes and Tips](#notes-and-tips)
 - [Bug Reports and Feature Requests](#bug-reports-and-feature-requests)
+- [Credits](#credits)
 - [License](#license)
 
 ## Installation
@@ -20,10 +21,10 @@ faz-bot app for Wynncraft data collection
 
 ### Requirements
 
-- git: [git-scm.com](https://git-scm.com/downloads)
-- uv: [docs.astral.sh/uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
-- MySQL (non-docker): [mysql.com](https://dev.mysql.com/downloads/mysql/)
-- Docker (docker): [docker.com](https://www.docker.com/)
+- [git](https://git-scm.com/downloads)
+- [uv](https://docs.astral.sh/uv/getting-started/installation/#standalone-installer)
+- [MySQL](https://dev.mysql.com/downloads/mysql/) (if not using docker)
+- [Docker](https://www.docker.com/) (if using docker)
 
 ### Steps
 
@@ -63,6 +64,14 @@ faz-bot app for Wynncraft data collection
 ## Bug Reports and Feature Requests
 
 You can report bug or request for features on the [issue tracker](https://github.com/FAZuH/faz-bot-app-collect/issues).
+
+## Credits
+
+This project is inspired from:
+
+- [Wynntils](https://github.com/Wynntils/Wynntils)
+- [moto-bot](https://github.com/motoki317/moto-bot)
+- [Corkus.py](https://github.com/MrBartusek/corkus.py)
 
 ## License
 
