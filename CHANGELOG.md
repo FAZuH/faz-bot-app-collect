@@ -1,4 +1,19 @@
+## [0.1.7](https://github.com/FAZuH/faz-bot-app-collect/compare/v0.1.6...v0.1.7) (2024-12-27)
+
+
+### Miscellaneous Chores
+
+* Bump dependencies ([#1](https://github.com/FAZuH/faz-bot-app-collect/issues/1)) ([85f1caa](https://github.com/FAZuH/faz-bot-app-collect/commit/85f1caaabf8d2d6f638eda03358d9cac3ed9ad77))
+* Update README.md [skip ci] ([972826a](https://github.com/FAZuH/faz-bot-app-collect/commit/972826a02269ca8858fff3f8cc6f47f65f321fb1))
+* Update README.md [skip ci] ([7f7c288](https://github.com/FAZuH/faz-bot-app-collect/commit/7f7c288fa90dfa964237029fee1eafd33f37444d))
+* Update README.md [skip ci] ([35ce9a3](https://github.com/FAZuH/faz-bot-app-collect/commit/35ce9a3eae2a8e73b1896a7f2de1ae401f343827))
+
 ## [0.1.6](https://github.com/FAZuH/faz-bot-app-collect/compare/v0.1.5...v0.1.6) (2024-11-29)
+
+
+### Miscellaneous Chores
+
+* **release:** v0.1.6 [skip ci] ([700a7b0](https://github.com/FAZuH/faz-bot-app-collect/commit/700a7b0d75beb4519b3c9682dfc0fe8a971559e4))
 
 
 ### Build System
@@ -41,11 +56,4 @@
 ### Miscellaneous Chores
 
 * **release:** v0.1.3 [skip ci] ([1cc618e](https://github.com/FAZuH/faz-bot-app-collect/commit/1cc618e1027173f81e1b50869072e0538986667a))
-
-## [0.1.2](https://github.com/FAZuH/faz-bot-app-collect/compare/v0.1.1...v0.1.2) (2024-11-26)
-
-
-### Miscellaneous Chores
-
-* **release:** v0.1.2 [skip ci] ([c425346](https://github.com/FAZuH/faz-bot-app-collect/commit/c4253464024fab5ed4f7a317ab2653c80ab8d5e7))
 
