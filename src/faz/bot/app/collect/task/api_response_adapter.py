@@ -72,6 +72,7 @@ class ApiResponseAdapter:
                     type=character.type.get_kind_str(),
                 )
                 for character_uuid, character in resp.body.iter_characters()
+                if character.type.type is not None
             ]
 
         @staticmethod
