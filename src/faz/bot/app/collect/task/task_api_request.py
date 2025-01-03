@@ -50,13 +50,10 @@ class TaskApiRequest(ITask):
     @override
     def run(self) -> None:
         with logger.catch(level="ERROR"):
-            self._event_loop.run_until_complete(self._run())
+            self._event_loop.run_until_complete(self._check_api_session())
+            self._start_requests()
+            self._check_responses()
         self._latest_run = datetime.now()
-
-    async def _run(self) -> None:
-        await self._check_api_session()
-        self._start_requests()
-        self._check_responses()
 
     async def _check_api_session(self) -> None:
         if not self._api.request.is_open():
