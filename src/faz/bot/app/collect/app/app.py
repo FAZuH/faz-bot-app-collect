@@ -9,7 +9,7 @@ from faz.utils.retry_handler import RetryHandler
 from loguru import logger
 
 from faz.bot.app.collect.heartbeat import Heartbeat
-from faz.bot.app.collect.properties import Properties
+from faz.bot.app.collect.app.properties import Properties
 
 
 class App:
