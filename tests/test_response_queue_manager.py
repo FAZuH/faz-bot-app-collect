@@ -4,15 +4,15 @@ from unittest.mock import MagicMock
 
 from faz.bot.wynn.api.wynn_api import WynnApi
 
-from faz.bot.app.collect.task._response_handler import ResponseHandler
+from faz.bot.app.collect.task._request_queue_manager import RequestQueueManager
 from faz.bot.app.collect.task.request_queue import RequestQueue
 
 
-class TestResponseHandler(TestCase):
+class TestRequestQueueManager(TestCase):
     def setUp(self) -> None:
         self._api = MagicMock(spec_set=WynnApi)
         self.__request_list = MagicMock(spec_set=RequestQueue)
-        self._manager = ResponseHandler(self._api, self.__request_list)
+        self._manager = RequestQueueManager(self._api, self.__request_list)
 
     # OnlinePlayerResponse
     def test_process_new_response(self) -> None:

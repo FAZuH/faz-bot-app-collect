@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from faz.bot.wynn.api.response.player_response import PlayerResponse
 
 
-class ApiResponseAdapter:
+class ResponseAdapter:
     """Adapter for converting wynncraft API responses to DB models."""
 
     class Player:

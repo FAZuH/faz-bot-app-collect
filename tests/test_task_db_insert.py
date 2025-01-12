@@ -13,7 +13,7 @@ from faz.bot.app.collect.task.task_db_insert import TaskDbInsert
 
 class TestTaskDbInsert(IsolatedAsyncioTestCase):
     def setUp(self) -> None:
-        self._adapter_patcher = patch("faz.bot.app.collect.task.task_db_insert.ApiResponseAdapter")
+        self._adapter_patcher = patch("faz.bot.app.collect.task.task_db_insert.ResponseAdapter")
         mock_adapter_class = self._adapter_patcher.start()
         self._mock_adapter = mock_adapter_class.return_value
         self._mock_api = AsyncMock()
@@ -46,7 +46,7 @@ class TestTaskDbInsert(IsolatedAsyncioTestCase):
         # Prepare
         self._task_db_insert._run = AsyncMock()
         self._mock_response_list.get.return_value = None
-        self._task_db_insert._response_handler = handler = Mock()
+        self._task_db_insert._request_queue_manager = handler = Mock()
         # Act
         self._task_db_insert.run()
         # Assert
@@ -60,7 +60,7 @@ class TestTaskDbInsert(IsolatedAsyncioTestCase):
         online_players = Mock(spec_set=OnlinePlayersResponse)
         player = Mock(spec_set=PlayerResponse)
         guild = Mock(spec_set=GuildResponse)
-        self._task_db_insert._response_handler = handler = Mock()
+        self._task_db_insert._request_queue_manager = handler = Mock()
         self._mock_response_list.get.return_value = [online_players, player, guild]
         # Act
         self._task_db_insert.run()

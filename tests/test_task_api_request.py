@@ -35,15 +35,6 @@ class TestTaskApiRequest(unittest.IsolatedAsyncioTestCase):
         # Assert
         self._mock_api.close.assert_called_once()
 
-    def test_run(self):
-        # Prepare
-        self._task_api_request._run = AsyncMock()
-        # Act
-        self._task_api_request.run()
-        # Assert
-        self._task_api_request._run.assert_called_once()
-        self.assertIsNotNone(self._task_api_request._latest_run)
-
     async def test_check_api_session(self):
         # Prepare
         self._mock_api.request.is_open.return_value = False

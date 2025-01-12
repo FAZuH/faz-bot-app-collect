@@ -30,6 +30,7 @@ class TaskApiRequest(ITask):
         self._response_list = response_queue
 
         self._event_loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(self._event_loop)
         self._latest_run = datetime.now()
         self._running_requests: list[asyncio.Task[Resp]] = []
 

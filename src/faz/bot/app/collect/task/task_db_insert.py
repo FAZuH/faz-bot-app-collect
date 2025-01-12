@@ -10,8 +10,8 @@ from faz.bot.wynn.api.response.player_response import PlayerResponse
 from faz.utils.heartbeat.task.itask import ITask
 from loguru import logger
 
-from faz.bot.app.collect.task._response_handler import ResponseHandler
-from faz.bot.app.collect.task.api_response_adapter import ApiResponseAdapter
+from faz.bot.app.collect.task._request_queue_manager import RequestQueueManager
+from faz.bot.app.collect.task._response_adapter import ResponseAdapter
 
 if TYPE_CHECKING:
     from faz.bot.database.fazwynn.fazwynn_database import FazwynnDatabase
@@ -38,8 +38,8 @@ class TaskDbInsert(ITask):
 
         self._event_loop = asyncio.new_event_loop()
         self._latest_run = datetime.now()
-        self._response_adapter = ApiResponseAdapter()
-        self._response_handler = ResponseHandler(self._api, self._request_list)
+        self._response_adapter = ResponseAdapter()
+        self._request_queue_manager = RequestQueueManager(self._api, self._request_list)
         self._start_time = datetime.now()
 
     def setup(self) -> None: ...
@@ -69,10 +69,10 @@ class TaskDbInsert(ITask):
                 guild_resps.append(resp)
 
         # NOTE: Make sure responses are handled first before inserting.
-        # NOTE: Insert online players requires the most recent response_handler.online_players data.
-        self._response_handler.handle_onlineplayers_response(online_players_resp)
-        self._response_handler.handle_player_response(player_resps)
-        self._response_handler.handle_guild_response(guild_resps)
+        # NOTE: Insert online players requires the most recent request_queue_manager.online_players data.
+        self._request_queue_manager.handle_onlineplayers_response(online_players_resp)
+        self._request_queue_manager.handle_player_response(player_resps)
+        self._request_queue_manager.handle_guild_response(guild_resps)
 
         await self._insert_online_players_response(online_players_resp)
         await self._insert_guild_response(guild_resps)
@@ -85,7 +85,7 @@ class TaskDbInsert(ITask):
 
         online_players = adapter.to_online_players(resp)
         player_activity_history = adapter.to_player_activity_history(
-            resp, self._response_handler.online_players
+            resp, self._request_queue_manager.online_players
         )
         worlds = list(adapter.to_worlds(resp))
 
@@ -134,8 +134,8 @@ class TaskDbInsert(ITask):
         await db.guild_member_history.insert(guild_member_history, ignore_on_duplicate=True)
 
     @property
-    def response_handler(self) -> ResponseHandler:
-        return self._response_handler
+    def request_queue_manager(self) -> RequestQueueManager:
+        return self._request_queue_manager
 
     @property
     def first_delay(self) -> float:

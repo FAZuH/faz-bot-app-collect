@@ -9,7 +9,7 @@ from faz.bot.wynn.api.wynn_api import WynnApi
 from faz.bot.app.collect.task.request_queue import RequestQueue
 
 
-class ResponseHandler:
+class RequestQueueManager:
     """Handles Wynncraft response processing, queueing, and requeuing."""
 
     def __init__(self, api: WynnApi, request_list: RequestQueue) -> None:

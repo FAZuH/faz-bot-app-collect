@@ -4,9 +4,9 @@
 #
 # from faz.bot.database.fazwynn.model.character_history import CharacterHistory
 #
-# from faz.bot.app.collect.task.api_response_adapter import ApiResponseAdapter
+# from faz.bot.app.collect.task.api_response_adapter import ResponseAdapter
 #
-# from fazdb.util import ApiResponseAdapter
+# from fazdb.util import ResponseAdapter
 # from fazutil.db.fazdb.model import CharacterHistory
 # from fazutil.db.fazdb.model.column import DateColumn, GamemodeColumn, UuidColumn
 
@@ -14,11 +14,11 @@
 # from tests.fixtures_api import FixturesApi
 
 
-# class TestApiResponseAdapterFromfixture(unittest.IsolatedAsyncioTestCase):
+# class TestResponseAdapterFromfixture(unittest.IsolatedAsyncioTestCase):
 #     """Tests if db.models is properly storing data."""
 #
 #     async def asyncSetUp(self) -> None:
-#         self.adapter = ApiResponseAdapter()
+#         self.adapter = ResponseAdapter()
 #
 #         self.fixtures = FixturesApi()
 #         self.mock_guildstats = self.fixtures.get_guilds()
