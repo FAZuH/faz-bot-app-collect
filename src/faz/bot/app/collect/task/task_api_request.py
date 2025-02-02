@@ -56,6 +56,8 @@ class TaskApiRequest(ITask):
             self._check_responses()
         self._latest_run = datetime.now()
 
+    def run_request(self) -> None: ...
+
     async def _check_api_session(self) -> None:
         if not self._api.request.is_open():
             logger.warning("HTTP session is closed. Reopening...")

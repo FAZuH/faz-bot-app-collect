@@ -64,7 +64,6 @@ class Request:
         """
         return self._scheduled_time
 
-    @property
     def get_result(self) -> Response:
         if self._task is None:
             raise RuntimeError("Request has not been run yet.")

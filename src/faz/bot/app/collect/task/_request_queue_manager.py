@@ -1,12 +1,16 @@
 from datetime import datetime
-from typing import Iterable
+from typing import TYPE_CHECKING, Any, Iterable
 
+from faz.bot.wynn.api.base_response import BaseResponse
 from faz.bot.wynn.api.response.guild_response import GuildResponse
 from faz.bot.wynn.api.response.online_players_response import OnlinePlayersResponse
 from faz.bot.wynn.api.response.player_response import PlayerResponse
 from faz.bot.wynn.api.wynn_api import WynnApi
 
 from faz.bot.app.collect.task.request_queue import RequestQueue
+
+if TYPE_CHECKING:
+    type Response = BaseResponse[Any, Any]
 
 
 class RequestQueueManager:
@@ -20,6 +24,14 @@ class RequestQueueManager:
         self._online_players: dict[str, datetime] = {}
         self._logged_on_guilds: set[str] = set()
         self._logged_on_players: set[str] = set()
+
+    def on_request_complete(self, response: BaseResponse) -> None:
+        if isinstance(response, GuildResponse):
+            self.handle_guild_response([response])
+        elif isinstance(response, OnlinePlayersResponse):
+            self.handle_onlineplayers_response(response)
+        elif isinstance(response, PlayerResponse):
+            self.handle_player_response([response])
 
     def handle_onlineplayers_response(self, resp: None | OnlinePlayersResponse) -> None:
         if not resp or not resp.body.raw:
